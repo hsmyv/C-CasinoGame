@@ -2,7 +2,7 @@
 There is little fraude that if user win more than 10, he will lose although he guess truly
 
 
- if(random == guess)
+    if(random == guess)
         {
             if(winning >= 10)  
             {
