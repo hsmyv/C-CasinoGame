@@ -7,19 +7,23 @@ using namespace std;
 
 void drawLine(int n, char symbol);
 void rules();
+void winnerDisplay();
+void loserDisplay();
 
-
-int main()
-{
     string playerName;
     int amount;
     int bettingAmount;
     int guess;
     int random;
     char choice;
-    int winning = 0;
+    int winning;
+    int randomf;
+    bool isalive;
+    int addfraudly = 3;
 
-
+int main()
+{
+   
     srand(time(0)); // "Seed" the random generator
     drawLine(60, '_');
     cout << "\n\n\n\t\tCASINO GAME\n\n\n\n";
@@ -43,7 +47,7 @@ int main()
             if (bettingAmount > amount)
                 cout << "Your betting amount is more than your current balance\n"
                      << "\nPlease re-enter again!\n ";
-        } while (bettingAmount >amount);
+        } while (bettingAmount > amount);
 
         do
         {
@@ -54,21 +58,38 @@ int main()
                      << "\nPlease re-enter again\n ";
         } while (guess <= 0 || guess > 10);
 
-        random = rand()%1 +1;
-        if(random == guess)
+        random = rand() % 10 + 1;
+        if (random == guess)
         {
-            if(winning >= 10)  // there is little fraude that if user win more than 10, he will lose although he guess truly
+            winning += 1;
+            cout << winning << endl;
+            if (winning < 10)
             {
-                cout << "\nThe winning number was : " << random + 1 << "\n";
-                cout << "Bad Luck this time !! You lost $ " << bettingAmount << "\n";
-                amount = amount - bettingAmount;
-                
-            }else{
-                cout << "\nThe winning number was : " << random << "\n";
-                cout << "\n\nGood Luck!! You won $ " << bettingAmount * 10;
-                amount = amount + bettingAmount * 10;
-                winning += 1;
+                winnerDisplay();
             }
+            
+            // there is little fraude that if user win more than 10, he will lose although he guess truly
+            if (winning >= 10)
+            {
+                cout << "addfraudly" << addfraudly << endl;
+                randomf = rand() % addfraudly;
+                switch (randomf)
+                {
+                case 1:
+                    
+                    winnerDisplay();
+                    addfraudly += 1;   // winning opportunity getting little bit hard
+                    break;
+                default:
+                    random += 1; // display false winning random number
+                    loserDisplay();
+                    break;
+                }
+            }
+        }
+        else
+        {
+            loserDisplay();
         }
 
         cout << "\n"
@@ -89,9 +110,25 @@ int main()
     drawLine(70, '=');
 }
 
-    void drawLine(int n, char symbol){
-        for (int i = 0; i < n; i++)
-            cout << symbol;
-        cout << "n";
+void drawLine(int n, char symbol)
+{
+    for (int i = 0; i < n; i++)
+        cout << symbol;
+    cout << "n";
+}
 
-    }
+void winnerDisplay()
+{
+    cout << "\nThe winning number was : " << random << "\n";
+    cout << "\n\nGood Luck!! You won $ " << bettingAmount * 10;
+    amount = amount + bettingAmount * 10;
+    
+   
+}
+
+void loserDisplay()
+{
+    cout << "\nThe winning number was : " << random << "\n";
+    cout << "Bad Luck this time !! You lost $ " << bettingAmount << "\n";
+    amount = amount - bettingAmount;
+}
