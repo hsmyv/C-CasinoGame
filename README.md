@@ -1,16 +1,16 @@
 # C-CasinoGame
-if (random == guess)
+
+
+    if (random == guess)
         {
             winning += 1;
             cout << winning << endl;
             if (winning < 10)
             {
                 winnerDisplay();
-            }
-            
-// there is little fraude that if user win more than 10, he will lose although he guess truly
-            if (winning >= 10)
-            {
+            }          
+     if (winning >= 10)// there is little fraude that if user win more than 10, he will lose although he guess truly
+           {
                 cout << "addfraudly" << addfraudly << endl;
                 randomf = rand() % addfraudly;
                 switch (randomf)
@@ -32,19 +32,17 @@ if (random == guess)
             loserDisplay();
         }
  
- void winnerDisplay()
-{
-    cout << "\nThe winning number was : " << random << "\n";
-    cout << "\n\nGood Luck!! You won $ " << bettingAmount * 10;
-    amount = amount + bettingAmount * 10;
-    
-   
-}
+        void winnerDisplay()
+                {
+                    cout << "\nThe winning number was : " << random << "\n";
+                    cout << "\n\nGood Luck!! You won $ " << bettingAmount * 10;
+                    amount = amount + bettingAmount * 10;
+                }
 
-void loserDisplay()
-{
-    cout << "\nThe winning number was : " << random << "\n";
-    cout << "Bad Luck this time !! You lost $ " << bettingAmount << "\n";
-    amount = amount - bettingAmount;
-}
+        void loserDisplay()
+                {
+                    cout << "\nThe winning number was : " << random << "\n";
+                    cout << "Bad Luck this time !! You lost $ " << bettingAmount << "\n";
+                    amount = amount - bettingAmount;
+                }
      
